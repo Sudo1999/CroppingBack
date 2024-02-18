@@ -1,0 +1,15 @@
+--DROP TABLE IF EXISTS RECTANGLE;
+--
+--CREATE TABLE RECTANGLE(
+-- id INT PRIMARY KEY,
+-- upX INT,
+-- upY INT,
+-- width INT,
+-- height INT
+--);
+--
+--INSERT INTO RECTANGLE (id, upX, upY, width, height) VALUES
+-- (001, 0, 0, 1, 1),
+-- (002, 0, 0, 10, 10),
+-- (003, 5, 5, 5, 5),
+-- (004, 3, 3, 4, 4);
