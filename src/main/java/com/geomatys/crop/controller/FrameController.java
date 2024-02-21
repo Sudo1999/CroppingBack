@@ -101,7 +101,7 @@ public class FrameController {
      * POST /uploadfile -> receive and locally save a file.
      *
      * @param uploadfile The uploaded file as Multipart file parameter in the HTTP request.
-     * The RequestParam name must be the same as the attribute "name" in the Angular input tag with type file.
+     * The RequestParam name must be the same as the attribute "name" in the Angular input tag with type file (frame-list.component.html).
      *
      * @return a http OK status in case of success, a http 4xx status in case of errors.
      */
@@ -110,10 +110,12 @@ public class FrameController {
     public ResponseEntity<?> uploadFile( @RequestParam("uploadfile") MultipartFile uploadfile, RedirectAttributes redirectAttributes) {
         // => [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException:
         // Request method 'GET' is not supported]
+        System.out.println("La fonction uploadFile du back a été appelée");
         try {
             // Get the filename and build the local file path (be sure that the application have write permissions on such directory)
             String filename = uploadfile.getOriginalFilename();
             String directory = "C:\\Users\\Martine\\Documents\\IntelliJ\\Cropping\\uploads";
+            // => String directory = Paths.get("./uploads/").toString();
             String filepath = Paths.get(directory, filename).toString();
 
             // Save the file locally
@@ -141,12 +143,12 @@ public class FrameController {
         }
     }
 
-//    @PostMapping("/")
-//    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-//        frameService.store(file);
-//        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + " !");
-//        return "redirect:/";
-//    }
+    @PostMapping("/upload")
+    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+        frameService.store(file);
+        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + " !");
+        return "redirect:/";
+    }
 
 //    @PostMapping("/image")
 //    public void addImage(@RequestBody Frame image) {
