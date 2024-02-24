@@ -95,40 +95,42 @@ public class FrameController {
         // between the original and the new crop object.
     }
 
-    /**
+    /** Upload crop image Springboot Ajax.docx :
+     *
      * POST /uploadfile -> receive and locally save a file.
      *
-     * @param uploadfile The uploaded file as Multipart file parameter in the HTTP request.
-     * The RequestParam name must be the same as the attribute "name" in the Angular input tag with type file (frame-list.component.html).
+     * @param file The uploaded file as Multipart file parameter in the HTTP request.
+     * The RequestParam name must be the same as the attribute "name" in the Angular input tag with type file (upload.component.html).
+     *             (Upload crop image Springboot Ajax.docx)
      *
      * @return a http OK status in case of success, a http 4xx status in case of errors.
      */
     @PostMapping("/uploadfile")
-    public ResponseEntity<?> uploadFile( @RequestParam MultipartFile uploadfile, RedirectAttributes redirectAttributes) {
+    public ResponseEntity<?> uploadFile( @RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
         // => [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException:
         // Request method 'GET' is not supported]
         System.out.println("La fonction uploadFile du back a été appelée");
         try {
             // Get the filename and build the local file path (be sure that the application have write permissions on such directory)
-            String filename = uploadfile.getOriginalFilename();
+            String filename = file.getOriginalFilename();
             String directory = "C:\\Users\\Martine\\Documents\\IntelliJ\\Cropping\\uploads";
             // => String directory = Paths.get("./uploads/").toString();
             String filepath = Paths.get(directory, filename).toString();
 
             // Save the file locally
             BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(filepath));
-            stream.write(uploadfile.getBytes());
+            stream.write(file.getBytes());
             stream.close();
 
             // Crop the image
-            BufferedImage croppedImage = frameService.cropImageSquare(uploadfile.getBytes());
+            BufferedImage croppedImage = frameService.cropImageSquare(file.getBytes());
             String extension = FilenameUtils.getExtension(filename);
             extension = extension != null ? extension : "";
             File outputfile = new File(filepath);
             ImageIO.write(croppedImage, extension, outputfile);
 
             // Store the file
-            frameService.store(uploadfile);
+            frameService.store(file);
             //redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + uploadfile.getOriginalFilename() + " !");
 
             return new ResponseEntity<>(HttpStatus.OK);
@@ -138,13 +140,6 @@ public class FrameController {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
-
-    @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
-        frameService.store(file);
-        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + " !");
-        return "redirect:/";
     }
 
 //    @PostMapping("/image")
@@ -159,8 +154,11 @@ public class FrameController {
 //        return imageRepository.findOne(example).get();
 //    }
 
+    ////  ==== The FileUploadController ====  ////
+
+    // Voir le signet :
+    // https://github.com/spring-guides/gs-uploading-files/blob/main/complete/src/main/java/com/example/uploadingfiles/FileUploadController.java
     @GetMapping("/")    // On arrive ici avec l'adresse http://localhost:8080/api/
-    // Le problème d'accès initial se résout tout seul en remplaçant l'annotation @Controller par @RestController
     public String[] listUploadedFiles(Model model) {
 
         //System.out.println(model.toString());       // => Affichage dans la console => {}
@@ -179,6 +177,9 @@ public class FrameController {
         //return "uploadForm";
     }
 
+    // Gestion fichiers images Springboot.docx :
+    // C'est aussi présenté sur GitHub (avec le téléchargement du fichier à la place) => Voir le signet :
+    // https://github.com/spring-guides/gs-uploading-files/blob/main/complete/src/main/java/com/example/uploadingfiles/FileUploadController.java
     @GetMapping("/file/{filename:.+}")      // Affichage dans le navigateur d'un fichier image stocké dans uploads
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
         // Le contrôleur reçoit la demande d’afficher l’image via l'url http://localhost:8080/api/file/Photo-test.jpg
@@ -208,7 +209,7 @@ public class FrameController {
                 .body(new InputStreamResource(fileInputStream));
     }
 
-    // Si l'on souhaite proposer le téléchargement du fichier, la fin de la méthode serveFile doit être modifiée :
+    // Si l'on souhaite à la place proposer le téléchargement du fichier, la fin de la méthode serveFile doit être modifiée :
     @GetMapping("/save/{filename:.+}")
     public ResponseEntity<Resource> saveFile(@PathVariable String filename) {
 
@@ -220,5 +221,12 @@ public class FrameController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + file.getFilename() + "\"").body(file);
         // => Le fichier est récupéré dans uploads (properties.getLocation()) et enregistré dans Téléchargements.
         // Le navigateur n'affiche rien, la page ne change pas pendant l'enregistrement du fichier.
+    }
+
+    @PostMapping("/upload")
+    public String handleFileUpload(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
+        frameService.store(file);
+        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + " !");
+        return "redirect:/";
     }
 }
