@@ -28,9 +28,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -52,7 +50,7 @@ public class FrameController {
     private FrameService frameService;
 
     @PostMapping("/process")
-    public ResponseEntity<byte[]> processFrame(@RequestParam("file") MultipartFile file, @RequestParam("cutout") Cutout cutout) {
+    public ResponseEntity<byte[]> processFrame(@RequestParam MultipartFile file, @RequestParam Cutout cutout) {
         try {
             // Chargez l'image depuis le fichier
             BufferedImage initialImage = ImageIO.read(file.getInputStream());
@@ -105,9 +103,8 @@ public class FrameController {
      *
      * @return a http OK status in case of success, a http 4xx status in case of errors.
      */
-    @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<?> uploadFile( @RequestParam("uploadfile") MultipartFile uploadfile, RedirectAttributes redirectAttributes) {
+    @PostMapping("/uploadfile")
+    public ResponseEntity<?> uploadFile( @RequestParam MultipartFile uploadfile, RedirectAttributes redirectAttributes) {
         // => [nio-8080-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException:
         // Request method 'GET' is not supported]
         System.out.println("La fonction uploadFile du back a été appelée");
@@ -144,14 +141,14 @@ public class FrameController {
     }
 
     @PostMapping("/upload")
-    public String handleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+    public String handleFileUpload(@RequestParam MultipartFile file, RedirectAttributes redirectAttributes) {
         frameService.store(file);
         redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + " !");
         return "redirect:/";
     }
 
 //    @PostMapping("/image")
-//    public void addImage(@RequestBody Frame image) {
+//    public void addImage(@Valid @RequestBody Frame image) {
 //        imageRepository.save(image);
 //    }
 
@@ -183,7 +180,6 @@ public class FrameController {
     }
 
     @GetMapping("/file/{filename:.+}")      // Affichage dans le navigateur d'un fichier image stocké dans uploads
-    @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
         // Le contrôleur reçoit la demande d’afficher l’image via l'url http://localhost:8080/api/file/Photo-test.jpg
         Resource file = frameService.loadAsResource(filename);
@@ -214,7 +210,6 @@ public class FrameController {
 
     // Si l'on souhaite proposer le téléchargement du fichier, la fin de la méthode serveFile doit être modifiée :
     @GetMapping("/save/{filename:.+}")
-    @ResponseBody
     public ResponseEntity<Resource> saveFile(@PathVariable String filename) {
 
         Resource file = frameService.loadAsResource(filename);

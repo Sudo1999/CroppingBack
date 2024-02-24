@@ -28,7 +28,7 @@ public class RectangleController {
 //    }
 
 //    @PostMapping("/rectangles")
-//    public void addRectangle(@RequestBody Rectangle rectangle) {
+//    public void addRectangle(@Valid @RequestBody Rectangle rectangle) {
 //        rectangleRepository.save(rectangle);
 //    }
 
@@ -44,13 +44,13 @@ public class RectangleController {
     }
 
 //    @GetMapping("{id}")
-//    public RectangleDto findById(@PathVariable("id") long id) {
+//    public RectangleDto findById(@PathVariable long id) {
 //        Optional<RectangleDto> optRectangle = rectangleService.findById(id);
 //        return optRectangle.orElse(null);
 //    }
 //
 //    @GetMapping("{}")
-//    public RectangleDto findRectangle(@PathVariable("coordonnees") Point upLeft, Point downRight) {
+//    public RectangleDto findRectangle(@PathVariable Point upLeft, @PathVariable Point downRight) {
 //        Optional<RectangleDto> optRectangle = rectangleService.findRectangle(upLeft, downRight);
 //        return optRectangle.orElse(null);
 //    }
@@ -63,7 +63,7 @@ public class RectangleController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") long id) {
+    public void delete(@PathVariable long id) {
         if (!rectangleService.delete(id)) {
             throw new RuntimeException("The id " + id + "doesn't exist");
         }
