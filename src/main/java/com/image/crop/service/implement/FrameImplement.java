@@ -1,6 +1,6 @@
-package com.geomatys.crop.service.implement;
+package com.image.crop.service.implement;
 
-import com.geomatys.crop.service.FrameService;
+import com.image.crop.service.FrameService;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

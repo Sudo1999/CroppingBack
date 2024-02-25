@@ -10,7 +10,7 @@
         <version>3.2.2</version>
         <relativePath/>
     </parent>
-    <groupId>com.geomatys.crop</groupId>
+    <groupId>com.image.crop</groupId>
     <artifactId>Cropping</artifactId>
     <version>1.0-SNAPSHOT</version>
 

@@ -1,4 +1,4 @@
-package com.geomatys.crop.utils;
+package com.image.crop.utils;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

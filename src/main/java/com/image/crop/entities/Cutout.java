@@ -1,4 +1,4 @@
-package com.geomatys.crop.entities;
+package com.image.crop.entities;
 
 import lombok.Getter;
 import lombok.Setter;

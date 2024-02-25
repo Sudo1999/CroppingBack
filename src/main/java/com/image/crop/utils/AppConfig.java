@@ -1,4 +1,4 @@
-package com.geomatys.crop.utils;
+package com.image.crop.utils;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.ViewResolver;
@@ -14,7 +14,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 // et https://www.tutorialspoint.com/viewresolver-in-spring-mvc
 
 //@Configuration
-//@ComponentScan(basePackages = "com.geomatys.crop")
+//@ComponentScan(basePackages = "com.image.crop")
 public class AppConfig {
 
     //private ISpringTemplateEngine templateEngine;

@@ -1,10 +1,10 @@
-package com.geomatys.crop.service.implement;
+package com.image.crop.service.implement;
 
-import com.geomatys.crop.dto.RectangleDto;
-import com.geomatys.crop.entities.Rectangle;
-import com.geomatys.crop.repository.RectangleRepository;
-import com.geomatys.crop.service.RectangleService;
-import com.geomatys.crop.utils.StreamUtils;
+import com.image.crop.dto.RectangleDto;
+import com.image.crop.entities.Rectangle;
+import com.image.crop.repository.RectangleRepository;
+import com.image.crop.service.RectangleService;
+import com.image.crop.utils.StreamUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

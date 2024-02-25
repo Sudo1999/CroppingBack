@@ -1,6 +1,6 @@
-package com.geomatys.crop.repository;
+package com.image.crop.repository;
 
-import com.geomatys.crop.entities.Frame;
+import com.image.crop.entities.Frame;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

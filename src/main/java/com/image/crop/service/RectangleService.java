@@ -1,6 +1,6 @@
-package com.geomatys.crop.service;
+package com.image.crop.service;
 
-import com.geomatys.crop.dto.RectangleDto;
+import com.image.crop.dto.RectangleDto;
 
 public interface RectangleService {
 

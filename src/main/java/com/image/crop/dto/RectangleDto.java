@@ -1,6 +1,6 @@
-package com.geomatys.crop.dto;
+package com.image.crop.dto;
 
-import com.geomatys.crop.entities.Rectangle;
+import com.image.crop.entities.Rectangle;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

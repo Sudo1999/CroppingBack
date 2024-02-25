@@ -1,7 +1,7 @@
-package com.geomatys.crop.controller;
+package com.image.crop.controller;
 
-import com.geomatys.crop.entities.Cutout;
-import com.geomatys.crop.service.FrameService;
+import com.image.crop.entities.Cutout;
+import com.image.crop.service.FrameService;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;

@@ -1,4 +1,4 @@
-package com.geomatys.crop.service;
+package com.image.crop.service;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

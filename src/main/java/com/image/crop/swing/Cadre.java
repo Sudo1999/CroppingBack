@@ -1,4 +1,4 @@
-package com.geomatys.crop.swing;
+package com.image.crop.swing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

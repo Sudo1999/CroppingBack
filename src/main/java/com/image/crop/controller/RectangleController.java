@@ -1,8 +1,8 @@
-package com.geomatys.crop.controller;
+package com.image.crop.controller;
 
-import com.geomatys.crop.dto.RectangleDto;
-import com.geomatys.crop.repository.RectangleRepository;
-import com.geomatys.crop.service.RectangleService;
+import com.image.crop.dto.RectangleDto;
+import com.image.crop.repository.RectangleRepository;
+import com.image.crop.service.RectangleService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

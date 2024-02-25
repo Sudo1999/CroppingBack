@@ -1,9 +1,9 @@
-package com.geomatys.crop;
+package com.image.crop;
 
-import com.geomatys.crop.entities.Frame;
-import com.geomatys.crop.entities.Rectangle;
-import com.geomatys.crop.repository.FrameRepository;
-import com.geomatys.crop.repository.RectangleRepository;
+import com.image.crop.entities.Frame;
+import com.image.crop.entities.Rectangle;
+import com.image.crop.repository.FrameRepository;
+import com.image.crop.repository.RectangleRepository;
 import java.util.stream.Stream;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

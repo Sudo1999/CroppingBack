@@ -1,4 +1,4 @@
-package com.geomatys.crop.service.implement;
+package com.image.crop.service.implement;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

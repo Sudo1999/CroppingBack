@@ -1,4 +1,4 @@
-package com.geomatys.crop.utils;
+package com.image.crop.utils;
 
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;

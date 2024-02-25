@@ -1,4 +1,4 @@
-package com.geomatys.crop.swing;
+package com.image.crop.swing;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
