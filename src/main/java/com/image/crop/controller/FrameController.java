@@ -49,6 +49,8 @@ public class FrameController {
     @Autowired
     private FrameService frameService;
 
+    ////  ==== Méthode /process ====  ////
+
     @PostMapping("/process")
     public ResponseEntity<byte[]> processFrame(@RequestParam MultipartFile file, @RequestParam Cutout cutout) {
         try {
@@ -95,8 +97,9 @@ public class FrameController {
         // between the original and the new crop object.
     }
 
-    /** Upload crop image Springboot Ajax.docx :
-     *
+    ////  ==== Upload crop image Springboot Ajax.docx ====  ////
+
+    /**
      * POST /uploadfile -> receive and locally save a file.
      *
      * @param file The uploaded file as Multipart file parameter in the HTTP request.
@@ -156,8 +159,9 @@ public class FrameController {
 
     ////  ==== The FileUploadController ====  ////
 
-    // Voir le signet :
+    //  ====  Gestion fichiers images Springboot.docx  ====
     // https://github.com/spring-guides/gs-uploading-files/blob/main/complete/src/main/java/com/example/uploadingfiles/FileUploadController.java
+    // https://spring.io/guides/gs/uploading-files
     @GetMapping("/")    // On arrive ici avec l'adresse http://localhost:8080/api/
     public String[] listUploadedFiles(Model model) {
 
@@ -177,9 +181,6 @@ public class FrameController {
         //return "uploadForm";
     }
 
-    // Gestion fichiers images Springboot.docx :
-    // C'est aussi présenté sur GitHub (avec le téléchargement du fichier à la place) => Voir le signet :
-    // https://github.com/spring-guides/gs-uploading-files/blob/main/complete/src/main/java/com/example/uploadingfiles/FileUploadController.java
     @GetMapping("/file/{filename:.+}")      // Affichage dans le navigateur d'un fichier image stocké dans uploads
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
         // Le contrôleur reçoit la demande d’afficher l’image via l'url http://localhost:8080/api/file/Photo-test.jpg
